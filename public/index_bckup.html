@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepaid Services</title>
+    
+</head>
+<body>
+    <h1>Prepaid Services!</h1>
+    <button id="data-btn">DATA</button>
+    <button id="placeOrder-btn">Place Order</button>
+    <button id="fetchOrder-btn">Fetch Order</button>
+
+    <script>
+        const dataBtn = document.querySelector("#data-btn");
+        const fetchOrderBtn = document.querySelector("#fetchOrder-btn");
+        
+        
+        dataBtn.addEventListener('click', async () => {
+            
+            try {
+                
+                const res = await fetch('/products'); 
+                const res_data = await res.json(); 
+                console.log(res_data);
+                
+            } catch (ex) {
+                console.log("error: ", ex);
+            }
+        });
+
+        fetchOrderBtn.addEventListener('click', async () => {
+            
+            const orderno = {
+                orderno: 2020082301523566 
+            };
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderno)
+            }
+
+            try {
+                
+
+                const res = await fetch('/fetchorder', options); 
+                const res_data = await res.json();
+                console.log(res_data);
+                
+            } catch (ex) {
+                console.log("error: ", ex);
+            }
+        });
+    
+    
+    </script>
+
+
+
+</body>
+</html>
